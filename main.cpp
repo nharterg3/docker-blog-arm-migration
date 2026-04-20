@@ -2,13 +2,15 @@
 #include <iostream>
 
 int main() {
-    std::cout << "x86-64 AVX2 Matrix Operations Benchmark" << std::endl;
-    std::cout << "========================================" << std::endl;
+    std::cout << "Arm64 Matrix Operations Benchmark" << std::endl;
+    std::cout << "=================================" << std::endl;
 
-#if defined(__x86_64__) || defined(_M_X64)
-    std::cout << "Running on x86-64 architecture with AVX2 optimizations" << std::endl;
+#if defined(__aarch64__)
+    std::cout << "Running on aarch64 architecture with NEON-friendly optimizations" << std::endl;
+#elif defined(__x86_64__) || defined(_M_X64)
+    std::cout << "Running on x86-64 architecture with fallback optimizations" << std::endl;
 #else
-    #error "This code requires x86-64 architecture with AVX2 support"
+    std::cout << "Running on an unsupported architecture; using portable fallback" << std::endl;
 #endif
 
     benchmark_matrix_ops();
